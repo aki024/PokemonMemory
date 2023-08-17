@@ -11,10 +11,9 @@ const Game = () => {
 		const getPokemonList = async () => {
 			const pokemonList = await getRandomPokemons(numberOfCards);
 			setPokemons(pokemonList);
+			setLoading(false);
 		};
 		getPokemonList();
-
-		setLoading(false);
 	}, [numberOfCards]);
 
 	return (
