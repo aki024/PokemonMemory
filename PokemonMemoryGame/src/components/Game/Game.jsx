@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Card from '../Card/Card';
 import getRandomPokemons from '../util/getRandomPokemons';
 
 const Game = () => {
@@ -20,7 +21,13 @@ const Game = () => {
 		<>
 			{!loading && (
 				<div>
-					GAME IS RUNNING {numberOfCards} {pokemons.length}
+					{pokemons.map((pokemon) => {
+						return (
+							<div key={pokemon.id}>
+								<Card pokemon={pokemon} />
+							</div>
+						);
+					})}
 				</div>
 			)}
 		</>
