@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { startGame } from '../../app/gameRunningSlice/gameRunningSlice';
 import easy from '../../assets/images/Easy.jpg';
 import normal from '../../assets/images/Normal.jpg';
 import hard from '../../assets/images/Hard.png';
 
-const OptionMenu = ({ setGameRunning, gameRunning, setDifficulty }) => {
+const OptionMenu = ({ setDifficulty }) => {
 	const cardGoals = [5, 10, 18];
-
+	const gameRunning = useSelector((state) => state.gameRunning.isRunning);
+	const dispatch = useDispatch();
 	const [cardGoal, setCardGoal] = useState(cardGoals[0]);
 
 	const handleStartGame = (e) => {
@@ -13,15 +16,15 @@ const OptionMenu = ({ setGameRunning, gameRunning, setDifficulty }) => {
 		switch (cardGoal) {
 			case '10':
 				setDifficulty(normal);
-				setGameRunning(true);
+				dispatch(startGame());
 				break;
 			case '18':
 				setDifficulty(hard);
-				setGameRunning(true);
+				dispatch(startGame());
 				break;
 			default:
 				setDifficulty(easy);
-				setGameRunning(true);
+				dispatch(startGame());
 		}
 	};
 
