@@ -14,6 +14,7 @@ const OptionMenu = ({ setDifficulty }) => {
 
 	const handleStartGame = (e) => {
 		e.preventDefault();
+		console.log('Options menu');
 		switch (cardGoal) {
 			case '10':
 				setDifficulty(normal);
