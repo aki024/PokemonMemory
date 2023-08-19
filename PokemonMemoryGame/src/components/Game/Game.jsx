@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import uniqid from 'uniqid';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './Game.module.scss';
 import Card from '../Card/Card';
 import getRandomPokemons from '../util/getRandomPokemons';
+import { incrementScore } from '../../app/scoreSlice/scoreSlice';
+import { loseGame, winGame } from '../../app/gameRunningSlice/gameStatusSlice';
+import Modal from '../Modal/Modal';
+import GameOverScreen from '../GameOverScreen/GameOverScreen';
 
 const Game = () => {
 	const [pokemons, setPokemons] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [cardsShowing, setCardsShowing] = useState(true);
+
 	const numberOfCards = useSelector((state) => state.numberOfCards.value);
+	const score = useSelector((state) => state.score.value);
+	const gameStatus = useSelector((state) => state.gameStatus.value);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const getPokemonList = async () => {
@@ -20,22 +28,32 @@ const Game = () => {
 		getPokemonList();
 	}, [numberOfCards]);
 
-	useEffect(() => {
-		console.log('Game component + pokemons updated');
-	}, []);
-
-	const handleClickTest = (id) => {
-		// const newArray = shuffleCards(pokemons);
+	const handleCardClick = (index) => {
 		setCardsShowing(false);
-		console.log(pokemons);
+		if (!pokemons[index].isClicked) {
+			//set isClicked to true
+			updateCardsClicked(index);
+			//add point
+			dispatch(incrementScore());
+			// dispatch(winGame())
+		} else {
+			dispatch(loseGame());
+			setCardsShowing(false);
+			return;
+			//game over code
+		}
+
 		setTimeout(() => {
 			setCardsShowing(true);
-			shufflePokemons();
+			shuffleCards(pokemons);
 		}, 850);
 		return;
+	};
 
-		// setPokemons(newArray);
-		// console.log(newArray);
+	const updateCardsClicked = (index) => {
+		const newCards = [...pokemons];
+		newCards[index].isClicked = true;
+		setPokemons(newCards);
 	};
 
 	const shuffleCards = (array) => {
@@ -43,31 +61,22 @@ const Game = () => {
 			const j = Math.floor(Math.random() * (i + 1));
 			[array[i], array[j]] = [array[j], array[i]];
 		}
-		return array;
-	};
-
-	const shufflePokemons = () => {
-		const availableCards = [...pokemons];
-		const shuffledPokemons = [];
-		while (availableCards.length) {
-			const index = Math.floor(Math.random() * availableCards.length);
-			const card = availableCards[index];
-			// Need to give a new key/uniqid for react to detect a rerender
-			card.id = uniqid();
-			shuffledPokemons.push(card);
-			availableCards.splice(index, 1);
-		}
-		setPokemons(shuffledPokemons);
+		setPokemons(array);
 	};
 
 	return (
 		<>
 			{!loading && (
 				<div className={styles.cards}>
+					{score}
+					{gameStatus === 'game-lost' && (
+						<Modal>
+							<GameOverScreen />
+						</Modal>
+					)}
 					{pokemons.map((pokemon, index) => {
-						return <Card key={pokemon.id} pokemon={pokemon} test={() => handleClickTest(index)} cardsShowing={cardsShowing} />;
+						return <Card key={pokemon.id} pokemon={pokemon} onClick={() => handleCardClick(index)} cardsShowing={cardsShowing} />;
 					})}
-					<button onClick={() => setCardsShowing(true)}>Turn</button>
 				</div>
 			)}
 		</>

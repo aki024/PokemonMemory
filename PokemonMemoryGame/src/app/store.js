@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import gameRunningReducer from './gameRunningSlice/gameRunningSlice';
+import gameStatusReducer from './gameRunningSlice/gameStatusSlice';
 import numberOfCardsReducer from './numberOfCardsSlice/numberOfCardsSlice';
+import scoreReducer from './scoreSlice/scoreSlice';
 
 export default configureStore({
 	reducer: {
-		gameRunning: gameRunningReducer,
-		numberOfCards: numberOfCardsReducer
+		gameStatus: gameStatusReducer,
+		numberOfCards: numberOfCardsReducer,
+		score: scoreReducer
 	}
 });

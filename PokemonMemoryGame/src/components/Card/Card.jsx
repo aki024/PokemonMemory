@@ -3,7 +3,7 @@ import styles from './Card.module.scss';
 // import "../styles/Card.css";
 import Tilt from 'react-parallax-tilt';
 
-export default function Card({ pokemon, test, cardsShowing }) {
+export default function Card({ pokemon, onClick, cardsShowing }) {
 	const { image, name, id } = pokemon;
 	const ANIMATION_TIME = 850;
 	const [interactable, setInteractable] = useState(false);
@@ -26,7 +26,7 @@ export default function Card({ pokemon, test, cardsShowing }) {
 			className={`${styles.cardContainer} ${cardsShowing ? styles.front : styles.back} ${cardsShowing && interactable ? undefined : styles.pointerEventsNone}`}>
 			<div className={styles.cardInner}>
 				<div className={styles.cardFront}>
-					<button className={styles.card} onClick={test}>
+					<button className={styles.card} onClick={onClick}>
 						<img src={image} alt={name} className={styles.cardImage} draggable='false' />
 						<p className={styles.cardName}>
 							<span className={styles.name}>{name}</span>
