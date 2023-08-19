@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import base from '../util/base';
+import base from '../../util/base';
 import { incrementScore, updateHighscore } from '../../app/scoreSlice/scoreSlice';
 import { loseGame, winGame } from '../../app/gameRunningSlice/gameStatusSlice';
 import Card from '../Card/Card';
@@ -10,6 +10,7 @@ import styles from './Game.module.scss';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import flipCardSound from '../../assets/sounds/flip.mp3';
 import gameStartSound from '../../assets/sounds/gameStart.mp3';
+import { startLoading, stopLoading } from '../../app/loadingSlice/loadingSlice';
 
 const flipCardAudio = new Audio(flipCardSound);
 flipCardAudio.volume = 0.2;
@@ -18,25 +19,28 @@ gameStartAudio.volume = 0.2;
 
 const Game = () => {
 	const { shuffleArray, getRandomPokemons, updateCardsClicked, playAudio } = base;
+
 	const [pokemons, setPokemons] = useState([]);
-	const [loading, setLoading] = useState(true);
 	const [cardsShowing, setCardsShowing] = useState(true);
 
 	const numberOfCards = useSelector((state) => state.numberOfCards.value);
 	const score = useSelector((state) => state.score.value);
 	const highscore = useSelector((state) => state.score.highscore);
 	const gameStatus = useSelector((state) => state.gameStatus.value);
+	const loading = useSelector((state) => state.loading.value);
 
 	const dispatch = useDispatch();
 
 	const getPokemonList = useCallback(async () => {
-		setLoading(true);
+		dispatch(startLoading());
+
 		const pokemonList = await getRandomPokemons(numberOfCards);
 
 		setPokemons(pokemonList);
-		setLoading(false);
+
+		dispatch(stopLoading());
 		playAudio(gameStartAudio);
-	}, [getRandomPokemons, numberOfCards, playAudio]);
+	}, [getRandomPokemons, numberOfCards, playAudio, dispatch]);
 
 	useEffect(() => {
 		getPokemonList();
@@ -98,8 +102,6 @@ const Game = () => {
 		<>
 			{(!loading || gameStatus === 'play-again') && (
 				<div className={styles.cards}>
-					<p>Highscore {highscore}</p> <br />
-					{score} / {numberOfCards}
 					{gameStatus !== 'running' && gameStatus !== 'play-again' && (
 						<Modal>
 							<GameOverScreen />

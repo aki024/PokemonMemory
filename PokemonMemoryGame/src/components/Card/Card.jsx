@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
-import styles from './Card.module.scss';
-// import "../styles/Card.css";
 import Tilt from 'react-parallax-tilt';
+import styles from './Card.module.scss';
+
+const ANIMATION_TIME = 850;
 
 export default function Card({ pokemon, onClick, cardsShowing }) {
 	const { image, name, id } = pokemon;
-	const ANIMATION_TIME = 850;
+
 	const [interactable, setInteractable] = useState(false);
 
 	useEffect(() => {
 		let timer = setTimeout(() => setInteractable(true), ANIMATION_TIME);
+
 		return () => {
 			clearTimeout(timer);
 		};

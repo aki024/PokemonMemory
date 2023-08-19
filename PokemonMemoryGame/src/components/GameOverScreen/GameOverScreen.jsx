@@ -1,6 +1,5 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { playAgain, startGame, stopGame } from '../../app/gameRunningSlice/gameStatusSlice';
+import { playAgain, stopGame } from '../../app/gameRunningSlice/gameStatusSlice';
 import { resetScore } from '../../app/scoreSlice/scoreSlice';
 
 const GameOverScreen = () => {
