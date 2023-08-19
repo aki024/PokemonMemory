@@ -23,6 +23,7 @@ const Main = () => {
 				</Modal>
 			)}
 			{gameStatus !== 'not-running' && <Game />}
+
 			{/* {gameStatus === 'game-lost' && (
 				<>
 					<Game />

@@ -17,10 +17,13 @@ export const gameStatusSlice = createSlice({
 		},
 		loseGame: (state) => {
 			state.value = 'game-lost';
+		},
+		playAgain: (state) => {
+			state.value = 'play-again';
 		}
 	}
 });
 
-export const { startGame, stopGame, winGame, loseGame } = gameStatusSlice.actions;
+export const { startGame, stopGame, winGame, loseGame, playAgain } = gameStatusSlice.actions;
 
 export default gameStatusSlice.reducer;
