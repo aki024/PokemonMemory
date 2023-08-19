@@ -9,9 +9,12 @@ import GameOverScreen from '../GameOverScreen/GameOverScreen';
 import styles from './Game.module.scss';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import flipCardSound from '../../assets/sounds/flip.mp3';
+import gameStartSound from '../../assets/sounds/gameStart.mp3';
 
 const flipCardAudio = new Audio(flipCardSound);
 flipCardAudio.volume = 0.2;
+const gameStartAudio = new Audio(gameStartSound);
+gameStartAudio.volume = 0.2;
 
 const Game = () => {
 	const { shuffleArray, getRandomPokemons, updateCardsClicked, playAudio } = base;
@@ -27,11 +30,13 @@ const Game = () => {
 	const dispatch = useDispatch();
 
 	const getPokemonList = useCallback(async () => {
+		setLoading(true);
 		const pokemonList = await getRandomPokemons(numberOfCards);
 
 		setPokemons(pokemonList);
 		setLoading(false);
-	}, [getRandomPokemons, numberOfCards]);
+		playAudio(gameStartAudio);
+	}, [getRandomPokemons, numberOfCards, playAudio]);
 
 	useEffect(() => {
 		getPokemonList();
