@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './Main.module.scss';
 import menuImage from '../../assets/images/menu.jpg';
@@ -6,18 +6,31 @@ import menuImage from '../../assets/images/menu.jpg';
 import Modal from '../Modal/Modal';
 import OptionMenu from '../OptionMenu/OptionMenu';
 import Game from '../Game/Game';
+import GameOverScreen from '../GameOverScreen/GameOverScreen';
 
-const Main = ({ setGameRunning }) => {
+const Main = () => {
 	const [difficulty, setDifficulty] = useState(menuImage);
-	const gameRunning = useSelector((state) => state.gameRunning.isRunning);
+	const gameStatus = useSelector((state) => state.gameStatus.value);
+
+	useEffect(() => {
+		console.log('MainMenu');
+	}, []);
 	return (
 		<main className={styles.main} style={{ backgroundImage: `url(${difficulty})` }}>
-			{!gameRunning && (
+			{gameStatus === 'not-running' && (
 				<Modal>
-					<OptionMenu gameRunning={gameRunning} setGameRunning={setGameRunning} setDifficulty={setDifficulty} />
+					<OptionMenu setDifficulty={setDifficulty} />
 				</Modal>
 			)}
-			{gameRunning && <Game />}
+			{gameStatus !== 'not-running' && <Game />}
+			{/* {gameStatus === 'game-lost' && (
+				<>
+					<Game />
+					<Modal>
+						<GameOverScreen />
+					</Modal>
+				</>
+			)} */}
 		</main>
 	);
 };

@@ -1,6 +1,8 @@
 const MIN_ID = 1;
 const MAX_ID = 300;
 
+//TODO : ADD VALIDATION SO NO DUPLICATES FROM API
+
 export default async function getRandomPokemons(amount) {
 	const pokemons = [];
 
@@ -22,7 +24,7 @@ export default async function getRandomPokemons(amount) {
 			let pokemon = await getPokemon(id);
 			let { name, image } = pokemon;
 
-			pokemonInfo = { id, name, image };
+			pokemonInfo = { id, name, image, isClicked: false };
 			pokemons.push(pokemonInfo);
 
 			i++;
