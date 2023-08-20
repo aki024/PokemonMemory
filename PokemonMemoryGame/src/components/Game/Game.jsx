@@ -7,9 +7,17 @@ import Card from '../Card/Card';
 import Modal from '../Modal/Modal';
 import GameOverScreen from '../GameOverScreen/GameOverScreen';
 import styles from './Game.module.scss';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import flipCardSound from '../../assets/sounds/flip.mp3';
+import gameStartSound from '../../assets/sounds/gameStart.mp3';
+
+const flipCardAudio = new Audio(flipCardSound);
+flipCardAudio.volume = 0.2;
+const gameStartAudio = new Audio(gameStartSound);
+gameStartAudio.volume = 0.2;
 
 const Game = () => {
-	const { shuffleArray, getRandomPokemons, updateCardsClicked } = base;
+	const { shuffleArray, getRandomPokemons, updateCardsClicked, playAudio } = base;
 	const [pokemons, setPokemons] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [cardsShowing, setCardsShowing] = useState(true);
@@ -22,11 +30,13 @@ const Game = () => {
 	const dispatch = useDispatch();
 
 	const getPokemonList = useCallback(async () => {
+		setLoading(true);
 		const pokemonList = await getRandomPokemons(numberOfCards);
 
 		setPokemons(pokemonList);
 		setLoading(false);
-	}, [getRandomPokemons, numberOfCards]);
+		playAudio(gameStartAudio);
+	}, [getRandomPokemons, numberOfCards, playAudio]);
 
 	useEffect(() => {
 		getPokemonList();
@@ -50,6 +60,7 @@ const Game = () => {
 		setCardsShowing(false);
 
 		if (!pokemons[index].isClicked) {
+			playAudio(flipCardAudio);
 			//set isClicked to true
 			updateCardsClicked(pokemons, index, setPokemons);
 			//add point
@@ -74,6 +85,14 @@ const Game = () => {
 
 		return;
 	};
+
+	if (loading) {
+		return (
+			<>
+				<LoadingSpinner />
+			</>
+		);
+	}
 
 	return (
 		<>

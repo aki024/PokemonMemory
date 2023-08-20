@@ -6,15 +6,11 @@ import menuImage from '../../assets/images/menu.jpg';
 import Modal from '../Modal/Modal';
 import OptionMenu from '../OptionMenu/OptionMenu';
 import Game from '../Game/Game';
-import GameOverScreen from '../GameOverScreen/GameOverScreen';
 
 const Main = () => {
 	const [difficulty, setDifficulty] = useState(menuImage);
 	const gameStatus = useSelector((state) => state.gameStatus.value);
 
-	useEffect(() => {
-		console.log('MainMenu');
-	}, []);
 	return (
 		<main className={styles.main} style={{ backgroundImage: `url(${difficulty})` }}>
 			{gameStatus === 'not-running' && (
@@ -23,15 +19,6 @@ const Main = () => {
 				</Modal>
 			)}
 			{gameStatus !== 'not-running' && <Game />}
-
-			{/* {gameStatus === 'game-lost' && (
-				<>
-					<Game />
-					<Modal>
-						<GameOverScreen />
-					</Modal>
-				</>
-			)} */}
 		</main>
 	);
 };
