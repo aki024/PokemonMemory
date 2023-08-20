@@ -1,0 +1,38 @@
+@font-face {
+	font-family: 'Pokemon font';
+	src: url('../assets/font/Pokemon\ GB.ttf');
+}
+
+* {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),
+		auto;
+}
+:root {
+	--my-variable: 'https://sharkri.github.io/pokememo/static/media/pokemon-bg.9a5d7c260a137ab099b1.png';
+	--my-var: background-image url('https://sharkri.github.io/pokememo/static/media/pokemon-bg.9a5d7c260a137ab099b1.png');
+}
+
+#root {
+	height: 100vh;
+	display: flex;
+	align-items: stretch;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+html {
+	overflow: auto;
+}
+
+body {
+	transition: background-image 0.5s ease-in-out;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center bottom;
+	font-family: 'Pokemon font', Courier, monospace;
+	overflow: auto;
+}
