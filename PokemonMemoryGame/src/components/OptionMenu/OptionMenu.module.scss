@@ -1,0 +1,123 @@
+.optionForm {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	padding: 2rem;
+	align-items: stretch;
+	font-weight: 600;
+
+	.title {
+		font-size: 26px;
+		overflow: hidden; /* Ensures the content is not revealed until the animation */
+		border-right: 0.1em solid black; /* The typwriter cursor */
+		margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+		letter-spacing: -0.05em;
+		animation: typing 1.2s steps(60, end), blink-caret 0.75s step-end infinite;
+		text-align: center;
+	}
+
+	.difficultyOptions {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 2rem;
+		margin: 8px 0;
+
+		label {
+			position: relative;
+			font-size: 24px;
+
+			input[type='radio'] {
+				display: none;
+			}
+
+			&.checked {
+				&::before {
+					animation: blink 0.75s infinite;
+					content: '';
+					position: absolute;
+					top: 3px;
+					left: -15px;
+					width: 2px;
+					height: 2px;
+					font-size: 2px;
+				}
+			}
+		}
+	}
+	.startDiv {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+
+		button {
+			background-color: transparent;
+			border: 0;
+			font-size: 24px;
+			text-align: left;
+			text-transform: uppercase;
+			font-weight: 400;
+			font-family: 'Pokemon font';
+			border: 0;
+			position: relative;
+
+			&:hover::before {
+				content: '';
+				position: absolute;
+				top: 2px;
+				left: -20px;
+				width: 2px;
+				height: 2px;
+				font-size: 2px;
+
+				box-shadow: 1em 0em 0 1px #000, 2em 0em 0 1px #000, 1em 1em 0 1px #000, 2em 1em 0 1px #000, 3em 1em 0 1px #000, 1em 2em 0 1px #000, 2em 2em 0 1px #000, 3em 2em 0 1px #000, 4em 2em 0 1px #000, 1em 3em 0 1px #000, 2em 3em 0 1px #000,
+					3em 3em 0 1px #000, 4em 3em 0 1px #000, 5em 3em 0 1px #000, 1em 4em 0 1px #000, 2em 4em 0 1px #000, 3em 4em 0 1px #000, 4em 4em 0 1px #000, 1em 5em 0 1px #000, 2em 5em 0 1px #000, 3em 5em 0 1px #000, 1em 6em 0 1px #000,
+					2em 6em 0 1px #000;
+			}
+		}
+	}
+}
+
+@keyframes appear {
+	0% {
+		visibility: hidden;
+	}
+	100% {
+		visibility: hidden;
+	}
+}
+
+@keyframes typing {
+	from {
+		white-space: nowrap;
+		width: 0;
+	}
+
+	to {
+		white-space: nowrap;
+		width: 100%;
+	}
+}
+
+@keyframes blink-caret {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: black;
+	}
+}
+
+@keyframes blink {
+	0% {
+		box-shadow: 1em 0em 0 0.1px #181010, 2em 0em 0 0.1px #181010, 1em 1em 0 0.1px #181010, 2em 1em 0 0.1px #181010, 3em 1em 0 0.1px #181010, 1em 2em 0 0.1px #181010, 2em 2em 0 0.1px #181010, 3em 2em 0 0.1px #181010, 4em 2em 0 0.1px #181010,
+			1em 3em 0 0.1px #181010, 2em 3em 0 0.1px #181010, 3em 3em 0 0.1px #181010, 4em 3em 0 0.1px #181010, 5em 3em 0 0.1px #181010, 1em 4em 0 0.1px #181010, 2em 4em 0 0.1px #181010, 3em 4em 0 0.1px #181010, 4em 4em 0 0.1px #181010,
+			1em 5em 0 0.1px #181010, 2em 5em 0 0.1px #181010, 3em 5em 0 0.1px #181010, 1em 6em 0 0.1px #181010, 2em 6em 0 0.1px #181010;
+	}
+	100% {
+		box-shadow: 1em 0em 0 transparent, 2em 0em 0 transparent, 1em 1em 0 transparent, 2em 1em 0 transparent, 3em 1em 0 transparent, 1em 2em 0 transparent, 2em 2em 0 transparent, 3em 2em 0 transparent, 4em 2em 0 transparent, 1em 3em 0 transparent,
+			2em 3em 0 transparent, 3em 3em 0 transparent, 4em 3em 0 transparent, 5em 3em 0 transparent, 1em 4em 0 transparent, 2em 4em 0 transparent, 3em 4em 0 transparent, 4em 4em 0 transparent, 1em 5em 0 transparent, 2em 5em 0 transparent,
+			3em 5em 0 transparent, 1em 6em 0 transparent, 2em 6em 0 transparent;
+	}
+}
