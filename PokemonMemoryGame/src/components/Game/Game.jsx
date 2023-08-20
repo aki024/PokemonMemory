@@ -1,19 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import base from '../../util/base';
-import { incrementScore, updateHighscore } from '../../app/scoreSlice/scoreSlice';
-import { loseGame, winGame } from '../../app/gameRunningSlice/gameStatusSlice';
 import Card from '../Card/Card';
 import Modal from '../Modal/Modal';
 import GameOverScreen from '../GameOverScreen/GameOverScreen';
-import styles from './Game.module.scss';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import { startLoading, stopLoading } from '../../app/loadingSlice/loadingSlice';
+import { incrementScore, updateHighscore } from '../../app/scoreSlice/scoreSlice';
+import { loseGame, winGame } from '../../app/gameRunningSlice/gameStatusSlice';
+import base from '../../util/base';
+import styles from './Game.module.scss';
 import flipCardSound from '../../assets/sounds/flip.mp3';
 import gameStartSound from '../../assets/sounds/gameStart.mp3';
-import { startLoading, stopLoading } from '../../app/loadingSlice/loadingSlice';
 
 const flipCardAudio = new Audio(flipCardSound);
 flipCardAudio.volume = 0.2;
+
 const gameStartAudio = new Audio(gameStartSound);
 gameStartAudio.volume = 0.2;
 
