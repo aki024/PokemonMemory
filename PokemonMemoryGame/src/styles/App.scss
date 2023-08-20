@@ -4,6 +4,10 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+:root {
+	--my-variable: 'https://sharkri.github.io/pokememo/static/media/pokemon-bg.9a5d7c260a137ab099b1.png';
+	--my-var: background-image url('https://sharkri.github.io/pokememo/static/media/pokemon-bg.9a5d7c260a137ab099b1.png');
+}
 
 #root {
 	height: 100vh;
@@ -11,4 +15,11 @@
 	align-items: stretch;
 	flex-direction: column;
 	justify-content: space-between;
+}
+
+body {
+	transition: background-image 0.5s ease-in-out;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center bottom;
 }
