@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { startGame } from '../../app/gameRunningSlice/gameRunningSlice';
+import { selectNumberOfCards } from '../../app/numberOfCardsSlice/numberOfCardsSlice';
 import easy from '../../assets/images/Easy.jpg';
 import normal from '../../assets/images/Normal.jpg';
 import hard from '../../assets/images/Hard.png';
@@ -30,6 +31,7 @@ const OptionMenu = ({ setDifficulty }) => {
 
 	const handleChange = (newCardGoal) => {
 		setCardGoal(newCardGoal);
+		dispatch(selectNumberOfCards(newCardGoal));
 
 		// playAudio(clickAudio);
 	};
