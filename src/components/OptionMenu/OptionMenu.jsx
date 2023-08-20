@@ -65,7 +65,7 @@ const OptionMenu = ({ background, setBackground }) => {
 
 			<div className={styles.startDiv}>
 				<button type='submit'>start game</button>
-				<button type='button' onClick={() => window.open('https://github.com/aki024/PokemonMemory/tree/main/PokemonMemoryGame', '_blank')}>
+				<button type='button' onClick={() => window.open('https://github.com/aki024/PokemonMemory', '_blank')}>
 					Github repo
 				</button>
 			</div>

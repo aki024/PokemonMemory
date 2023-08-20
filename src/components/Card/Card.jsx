@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import styles from './Card.module.scss';
+import cardBack from '../../assets/images/card-back.png';
 
 const ANIMATION_TIME = 850;
 
@@ -36,7 +37,7 @@ export default function Card({ pokemon, onClick, cardsShowing }) {
 					</button>
 				</div>
 				<div className={styles.cardBack}>
-					<img src={`https://raw.githubusercontent.com/Sharkri/pokememo/main/public/card-back.png`} alt='pokemon card back' className={styles.back} />
+					<img src={cardBack} alt='pokemon card back' className={styles.back} />
 				</div>
 			</div>
 		</Tilt>

@@ -4,6 +4,7 @@ import { selectNumberOfCards } from '../../app/numberOfCardsSlice/numberOfCardsS
 import { resetScore } from '../../app/scoreSlice/scoreSlice';
 import global from '../../config';
 import styles from './Header.module.scss';
+import pokeball from '../../assets/images/pokeball.png';
 
 const Header = ({ setBackground, menuImage }) => {
 	const { cardGoals } = global;
@@ -24,7 +25,7 @@ const Header = ({ setBackground, menuImage }) => {
 	return (
 		<header>
 			<button onClick={quitGameHandler}>
-				<img src='https://sharkri.github.io/pokememo/pokeball.png' alt='Pokeball' />
+				<img src={pokeball} alt='Pokeball' />
 				<span>Poke</span>
 				<span>Memo</span>
 			</button>
