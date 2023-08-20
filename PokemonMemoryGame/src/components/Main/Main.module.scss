@@ -1,0 +1,23 @@
+.main {
+	font-size: 50px;
+	height: 100%;
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+	padding: 2rem;
+	transition: background-image 0.2s ease-in-out;
+
+	background-repeat: no-repeat;
+
+	background-size: cover;
+
+	background-position: center bottom;
+	div {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		button {
+			padding: 4rem;
+		}
+	}
+}
